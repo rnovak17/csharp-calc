@@ -1,22 +1,27 @@
-﻿double Add(double x, double y)
+﻿double Calculate(int selection, double x, double y)
 {
-    return x + y;
+    double answer = 0.0;
+    switch (selection)
+    {
+        case 1:
+            answer = (x + y);
+            break;
+        case 2:
+            answer = (x - y);
+            break;
+        case 3:
+            answer = (x * y);
+            break;
+        case 4:
+            answer = (x / y);
+            break;
+        default:
+            Console.WriteLine("Please select a valid operation.");
+            break;
+    }
+    return answer;
 }
 
-double Subtract(double x, double y)
-{
-    return x - y;
-}
-
-double Multiply(double x, double y)
-{
-    return x * y;
-}
-
-double Divide(double x, double y)
-{
-    return x / y;
-}
 
 // print operator choices to user
 Console.WriteLine("Select operator: \n 1. Addition \n 2. Subtraction \n 3. " +
@@ -30,7 +35,7 @@ while (isValid == false) {
     string? opNum = Console.ReadLine();
 
     // check if the user input is valid
-    if (int.TryParse(opNum, out selection) && int.Parse(opNum) > 0 && int.Parse(opNum) < 4)
+    if (int.TryParse(opNum, out selection) && int.Parse(opNum) > 0 && int.Parse(opNum) <= 4)
     {
         // set condition to break the loop
         isValid = true;
@@ -50,27 +55,9 @@ Console.WriteLine("y: ");
 string? yStr = Console.ReadLine();
 double y = Convert.ToDouble(yStr);
 
-// TODO: Make this its own "calculate" function for readability
-double answer = 0.0;
-switch (selection)
-{
-    case 1:
-        answer = Add(x, y);
-        break;
-    case 2:
-         answer = Subtract(x, y);
-        break;
-    case 3:
-        answer = Multiply(x, y);
-        break;
-    case 4:
-        answer = Divide(x, y);
-        break;
-    default:
-        Console.WriteLine("Please select a valid operation.");
-        break;
-}
+// process user's inputs
+double output = Calculate(selection, x, y);
 
 // print output to user and wait to close prompt
-Console.WriteLine($"{Convert.ToString(answer)}");
+Console.WriteLine($"{Convert.ToString(output)}");
 Thread.Sleep(3000);
